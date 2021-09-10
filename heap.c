@@ -105,7 +105,26 @@ void shiftUp(int* arr, int n, int cur){
 		}
 	}
 }
-
+//堆排序
+void test(){
+	int arr[] = {16,27,4,3,5,16};
+	int n = sizeof(arr) / sizeof(arr[0]);
+	//建堆
+	for (int i = (n - 2) / 2; i >=0; --i){
+		shiftDown(arr, n, i);
+	}
+	int end = n - 1;
+	while (end > 0){
+		//交换
+		int tmp = arr[end];
+		arr[end] = arr[0];
+		arr[0] = tmp;
+		//下调整
+		shiftDown(arr, end, 0);
+		--end;
+	}
+}
+/*
 void test(){
 	int arr[] = { 1, 5, 10, 7, 8, 6,3,9,4,2 };
 	int n=sizeof(arr) / sizeof(arr[0]);
@@ -118,6 +137,7 @@ void test(){
 		heapPop(&hp);
 	}
 }
+*/
 //void test(){
 //	int arr[] = {10,5,8,3,2,1};
 //	int n=sizeof(arr) / sizeof(arr[0]);
