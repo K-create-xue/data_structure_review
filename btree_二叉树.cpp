@@ -1,5 +1,8 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<iostream>
+#include<queue>
+using namespace std;
 typedef char BTDataType; 
 
 typedef struct BTNode{
@@ -66,7 +69,7 @@ int BTLeafSize(BTNode* root){
 //第k层节点个数
 int BTLayerSize(BTNode* root,int K){
 	if (!root)
-		return;
+		return 0;
 	if (K == 1)
 		return 1;
 	return BTLayerSize(root->_left, K - 1)
@@ -102,10 +105,37 @@ void BTDestroy2(BTNode* root){
 		//不赋值为空，就会出现野指针
 	}
 }
-void test(){
+//层序遍历
+void BTLevelOrder(BTNode* root){
+	queue<BTNode*> q;
+	if (root)
+	q.push(root);
+	while (!q.empty()){
+		BTNode* node = q.front();
+		cout << node->_data;
+		if (node->_left)
+		q.push(node->_left);
+		if (node->_right)
+		q.push(node->_right);
+		q.pop();
+	}
+}
 
+void test(){
+	char arr[] = "ABD##E#H##CF##G##";
+	int index = 0;
+	BTNode* root = BinaryTreeCreate(arr, &index);
+	preOrder(root);
+	cout << endl;
+	inOrder(root);
+	cout << endl;
+	postOrder(root);
+	cout << endl;
+	BTLevelOrder(root);
+	cout << endl;
 }
 int main(){
 	test();
 	return 0;
 }
+//34
