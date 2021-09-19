@@ -263,6 +263,31 @@ void mergeSortNoR(int* arr, int n){
 		step *= 2;
 	}
 }
+
+//计数排序
+void countSort(int* arr, int n){
+	int max=arr[0], min=arr[0];
+	for (int i = 1; i < n; ++i){
+		if (arr[i]>max)
+			max = arr[i];
+		if (arr[i] < min)
+			min = arr[i];
+	}
+	//申请范围
+	int range = max - min + 1;
+	int* countArr = (int*)calloc(range, sizeof(int));
+	for (int i = 0; i < n; ++i){
+		countArr[arr[i] - min]++;
+	}
+	//遍历数组。排序
+	int idx = 0;
+	for (int i = 0; i < range; ++i){
+		idx = countArr[i];
+		while (idx--){
+			arr[idx++] = i+min;
+		}
+	}
+}
 //打印
 void printArr(int *arr, int n){
 	for (int i = 0; i < n; ++i){
